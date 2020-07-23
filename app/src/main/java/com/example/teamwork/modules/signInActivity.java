@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.room.Room;
 
@@ -20,7 +21,7 @@ public class signInActivity  extends AppCompatActivity {
     Button buttonLogin;
     UserDao db;
     UserDataBase dataBase;
-    CoordinatorLayout coordinatorLayout;
+    ConstraintLayout constraintLayout;
 
 
     @Override
@@ -31,7 +32,7 @@ public class signInActivity  extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
-
+        constraintLayout = (ConstraintLayout) findViewById(R.id.snackbarId);
 
         dataBase = Room.databaseBuilder(this, UserDataBase.class, "mi-database.db")
                 .allowMainThreadQueries()
@@ -51,16 +52,16 @@ public class signInActivity  extends AppCompatActivity {
                 User user = db.getUser(email, password);
                 if (user != null) {
                     Intent i = new Intent(signInActivity.this, home.class);
-                    i.putExtra("User", user);
+                    i.putExtra("Email", user.getEmail());
                     startActivity(i);
                     finish();
 
                     Snackbar snackbar = Snackbar
-                            .make(coordinatorLayout, "SignIn Successfull", Snackbar.LENGTH_LONG);
+                            .make(constraintLayout, "SignIn Successfull", Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }else{
                     Snackbar snackbar = Snackbar
-                            .make(coordinatorLayout, "‘Login Failed. Please\n" +
+                            .make(constraintLayout, "‘Login Failed. Please\n" +
                                     "check your credentials", Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }

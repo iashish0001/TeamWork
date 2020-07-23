@@ -4,5 +4,7 @@
     <string name="tab_text_1">Contact Us</string>
     <string name="tab_text_2">Images</string>
     <string name="tab_text_3">View Images</string>
+    <string name = "drawer_open">open</string>
+    <string name = "drawer_close">close</string>
 
 </resources>
